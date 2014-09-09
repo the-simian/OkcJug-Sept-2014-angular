@@ -602,6 +602,32 @@ And
 ```
 
 
+now lets make a controlelr for a post....
+
+```js
+angular.module('angledditApp')
+  .controller('SubredditPostlistItemCtrl', function ($scope) {
+
+  });
+
+```
+
+```js
+angular.module('angledditApp')
+  .directive('subredditPostlistItem', function () {
+    return {
+      templateUrl: './partials/subreddit.postlist-item.html',
+      restrict: 'E',
+      replace: true,
+      scope: {
+        post: '='
+      },
+      controller: 'SubredditPostlistItemCtrl'
+    };
+  });
+```
+
+upvote and downvoate buttons~~~~
 
 
 
