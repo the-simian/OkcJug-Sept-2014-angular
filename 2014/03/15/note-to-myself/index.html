@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Notes | Angular Tutorial</title>
+  <meta name="author" content="Jesse Harlin">
+  
+  <meta name="description" content="Lets make Angleddit- Its reddit, in angular!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Notes"/>
+  <meta property="og:site_name" content="Angular Tutorial"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/OkcJug-Sept-2014-angular/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/OkcJug-Sept-2014-angular/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/OkcJug-Sept-2014-angular/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body data-spy="scroll" data-target=".toc">
+  <div class="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/OkcJug-Sept-2014-angular/">Angular Tutorial</a> - Notes</h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  <div class="col-xs-12 col-sm-12 col-md-3 toc"> 
+	<!-- toc -->
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+ 		   generateWikiTOC('.note', '.toc',  2 , 2 );
+		});
+</script>
+  </div><!-- col-md-3 -->
+  
+  
+
+  
+  <div class="col-xs-12 col-sm-12 col-md-9 note">
+	
+
+	  <!-- content -->
+	  <ul>
+<li>need yeoman</li>
+<li>angular generator</li>
+</ul>
+<ul>
+<li><p>go get ui-router too!</p>
+</li>
+<li><p>have to add the angleddit view by hand :(</p>
+</li>
+<li><p>declare the view.</p>
+</li>
+<li><p>you need to modify th elinks at the top</p>
+</li>
+<li><p>now you have the app itself. neat.</p>
+</li>
+<li><p>we are going to make some resolved for the main view.</p>
+<ul>
+<li>make the controller. nothing goes in here jsut yet.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">AngledditApp</div><div class="line">  .config([<span class="string">'$stateProvider'</span>, <span class="function"><span class="keyword">function</span> <span class="title">angleddit</span><span class="params">($stateProvider)</span> </span>{</div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">()</span></span>{</div><div class="line">  </div><div class="line">    alert(<span class="string">'the controller shoudl load, when the view does'</span>);</div><div class="line">  }  </div><div class="line"></div><div class="line">  <span class="keyword">var</span> angledditView = {</div><div class="line">    url: <span class="string">'/angleddit'</span>,</div><div class="line">    templateUrl: <span class="string">'views/angleddit.html'</span>,</div><div class="line">    controller: angledditCtrl</div><div class="line">  };  </div><div class="line">    </div><div class="line">    </div><div class="line">  $stateProvider</div><div class="line">    .state(<span class="string">'angleddit'</span>, angledditView);</div><div class="line">}]);</div></pre></td></tr></table></figure>
+
+<ul>
+<li>time for resolve number one. we need a list of subreddits   </li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">AngledditApp</div><div class="line">  .config([<span class="string">'$stateProvider'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">angleddit</span><span class="params">($stateProvider)</span> </span>{</div><div class="line">      </div><div class="line">      </div><div class="line">      </div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">subredditsResolve</span><span class="params">()</span> </span>{</div><div class="line"></div><div class="line">      }</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditResolve = {</div><div class="line">        subreddits: subredditsResolve</div><div class="line"></div><div class="line">      };</div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">($scope, subreddits)</span> </span>{</div><div class="line">          $scope.subreddits = subreddits;</div><div class="line">      }</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditView = {</div><div class="line">        url: <span class="string">'/angleddit'</span>,</div><div class="line">        templateUrl: <span class="string">'views/angleddit.html'</span>,</div><div class="line">        controller: angledditCtrl,</div><div class="line">        resolve: angledditResolve</div><div class="line">      };</div><div class="line"></div><div class="line"></div><div class="line">      $stateProvider</div><div class="line">        .state(<span class="string">'angleddit'</span>, angledditView);</div><div class="line">}]);</div></pre></td></tr></table></figure>
+
+<ul>
+<li>does nothing, a job for a service!</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yo angular:<span class="class"><span class="keyword">service</span> <span class="title">subreddit</span></span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">create app<span class="command">\scripts</span><span class="command">\services</span><span class="command">\subreddit</span>.js</div><div class="line">create test<span class="command">\spec</span><span class="command">\services</span><span class="command">\subreddit</span>.js</div></pre></td></tr></table></figure>
+
+
+
+
+<p>boom we have service. does nothing. much sad.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="pi">'use strict'</span>;</div><div class="line">angular</div><div class="line">  .module(<span class="string">'angledditApp'</span>)</div><div class="line">  .service(<span class="string">'subreddit'</span>, <span class="function"><span class="keyword">function</span> <span class="title">subreddit</span><span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// AngularJS will instantiate a singleton by calling "new" on this function</span></div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>inject service into resolve.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">AngledditApp</div><div class="line">  .config([<span class="string">'$stateProvider'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">angleddit</span><span class="params">($stateProvider)</span> </span>{</div><div class="line">      </div><div class="line">      </div><div class="line">      </div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">subredditsResolve</span><span class="params">(subreddit)</span> </span>{</div><div class="line">          subreddit.list();</div><div class="line">      }</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditResolve = {</div><div class="line">        subreddits: subredditsResolve</div><div class="line"></div><div class="line">      };</div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">($scope, subreddits)</span> </span>{</div><div class="line">          $scope.subreddits = subreddits;</div><div class="line">      }</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditView = {</div><div class="line">        url: <span class="string">'/angleddit'</span>,</div><div class="line">        templateUrl: <span class="string">'views/angleddit.html'</span>,</div><div class="line">        controller: angledditCtrl,</div><div class="line">        resolve: angledditResolve</div><div class="line">      };</div><div class="line"></div><div class="line"></div><div class="line">      $stateProvider</div><div class="line">        .state(<span class="string">'angleddit'</span>, angledditView);</div><div class="line">}]);</div></pre></td></tr></table></figure>
+
+<p>and go ahead and add a list function in the serice too.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">angular</div><div class="line">  .module(<span class="string">'angledditApp'</span>)</div><div class="line">  .service(<span class="string">'subreddit'</span>, <span class="function"><span class="keyword">function</span> <span class="title">subreddit</span><span class="params">()</span> </span>{</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">list</span><span class="params">()</span></span>{</div><div class="line">      alert(<span class="string">'calling a function in a service. That revealing module!'</span>);</div><div class="line">    </div><div class="line">    }</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      list: list</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>refresh page. much glory to kazikstan, now make data!</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"jumbotron"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Angleddit home<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">      Your Subreddits: </div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>can do quick test</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">subredditsResolve</span><span class="params">(subreddit)</span> </span>{</div><div class="line"></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'getting list'</span>);</div><div class="line">  <span class="keyword">return</span> [{},{},{}];</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//and in controller..</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">($scope, subreddits)</span> </span>{</div><div class="line">    $scope.subreddits = subreddits;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<p>will see <code>Your Subreddits: [{},{},{}]</code> at bottom of page. yay no-yay.</p>
+<p>need real potato, right? yes.</p>
+<p>dont forget make inject resource!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> Subreddits = $resource(<span class="string">'http://www.reddit.com/reddits.json'</span>);</div><div class="line">  <span class="keyword">return</span> Subreddits.get({}).$promise;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<p>whoa. list work much trash on screen!!</p>
+<p>let us make use of viwer of json.</p>
+<ul>
+<li><p><a href="http://jsonviewer.stack.hu/" target="_blank" rel="external">http://jsonviewer.stack.hu/</a> I summon thee!</p>
+</li>
+<li><p>paste in the potato.</p>
+</li>
+</ul>
+<p>it is revealed the format! response.data.children!</p>
+<ul>
+<li>children.png</li>
+<li><p>childrencollapsed.png</p>
+</li>
+<li><p>look at that trash. its not as trashy anymore</p>
+</li>
+</ul>
+<ul>
+<li><p>now we have potato.</p>
+</li>
+<li><p>we have control</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">($scope, subreddits)</span> </span>{</div><div class="line">      $scope.subreddits = subreddits;</div><div class="line">  }</div></pre></td></tr></table></figure>
+
+
+<p>  potato very bound to scope.</p>
+<p>  Village rejoice.</p>
+<h1 id="Di-Rekt-Ive">Di-Rekt-Ive</h1>
+<p>  ng-repat.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yo angular:directive subreddit-menu</div></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yo angular:directive subreddit-menu-item</div></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">create app<span class="command">\scripts</span><span class="command">\directives</span><span class="command">\subreddit</span>-menu.js</div><div class="line">create test<span class="command">\spec</span><span class="command">\directives</span><span class="command">\subreddit</span>-menu.js</div><div class="line"></div><div class="line">create app<span class="command">\scripts</span><span class="command">\directives</span><span class="command">\subreddit</span>-menu-item.js</div><div class="line">create test<span class="command">\spec</span><span class="command">\directives</span><span class="command">\subreddit</span>-menu-item.js</div></pre></td></tr></table></figure>
+
+
+
+<p> look in the main page. so sexy.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">&lt;!-- build:js({.tmp,app}) scripts/scripts.js --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/app.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/controllers/main.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/services/subreddit.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/directives/subreddit-menu.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/directives/subreddit-menu-item.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- endbuild --&gt;</span></div></pre></td></tr></table></figure>
+
+
+<ul>
+<li>subreddit-menu-directives.png</li>
+</ul>
+<ul>
+<li>make partials folder. this differnt from views!</li>
+<li><p>make the subreddit-menu.html</p>
+<p>-modify it to this…</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'angledditApp'</span>)</div><div class="line">  .directive(<span class="string">'subredditMenu'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      templateUrl: <span class="string">'./partials/subreddit-menu.html'</span>,</div><div class="line">      restrict: <span class="string">'E'</span>,</div><div class="line">      replace: <span class="literal">true</span>,</div><div class="line">      link: <span class="function"><span class="keyword">function</span> <span class="title">postLink</span><span class="params">(scope, element, attrs)</span> </span>{</div><div class="line">        </div><div class="line">      }</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+
+<p>  points to partial</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">  SOMEDAY ILL BE A SUBREDDIT MENU</div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>whatever for now.</p>
+<p>refresh. Its on the page. awesome.</p>
+<p>NOW THE AMAZING SAUCE MAGICAL PIXIE DANCE PART.</p>
+<p>We make potato come to life.</p>
+<p>make directive partial like this.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">li</span> <span class="attribute">ng-repeat</span>=<span class="value">"subreddit in subreddits"</span>&gt;</span></div><div class="line">      </div><div class="line">    <span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>and the actual directive like this.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'angledditApp'</span>)</div><div class="line">  .directive(<span class="string">'subredditMenu'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      templateUrl: <span class="string">'./partials/subreddit-menu.html'</span>,</div><div class="line">      restrict: <span class="string">'E'</span>,</div><div class="line">      replace: <span class="literal">true</span>,</div><div class="line">      scope: {</div><div class="line">        subreddits: <span class="string">'='</span></div><div class="line">      },</div><div class="line">      link: <span class="function"><span class="keyword">function</span> <span class="title">postLink</span><span class="params">(scope, element, attrs)</span> </span>{</div><div class="line">        </div><div class="line">      }</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>In the controller we assigned the list…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">angledditCtrl</span><span class="params">($scope, subreddits)</span> </span>{</div><div class="line">    $scope.subreddits = subreddits;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>pretty awesome!</p>
+<p>now lets our bootstrap on it.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">h3</span>&gt;</span>Subreddits<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row btn-group-vertical"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> </span></div><div class="line">          <span class="attribute">ng-repeat</span>=<span class="value">"subreddit in subreddits"</span> </div><div class="line">           <span class="attribute">class</span>=<span class="value">" btn btn-default"</span>&gt;</div><div class="line">      <span class="tag">&lt;<span class="title">a</span> <span class="attribute">ui-sref</span>=<span class="value">"angleddit.r"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>beautiful. bland. eternal. bootstank.</p>
+<p>now, we add the next state….</p>
+<p>angleddit.r</p>
+<p>but first lets refactor subreddit menu, to repeat the menu items.<br>pedantic, but organized</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'angledditApp'</span>)</div><div class="line">  .directive(<span class="string">'subredditMenuItem'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      templateUrl: <span class="string">'./partials/subreddit-menu-item.html'</span>,</div><div class="line">      restrict: <span class="string">'E'</span>,</div><div class="line">      scope: {</div><div class="line">        subreddit: <span class="string">'@'</span></div><div class="line">      },</div><div class="line">      link: <span class="function"><span class="keyword">function</span> <span class="title">postLink</span><span class="params">(scope, element, attrs)</span> </span>{</div><div class="line"></div><div class="line">      }</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">AngledditApp</div><div class="line">  .config([<span class="string">'$stateProvider'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">angleddit</span><span class="params">(<span class="variable">$stateProvider</span>)</span> </span>{</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditView = {</div><div class="line">        url: <span class="string">'/r/:subreddit'</span>,</div><div class="line">        templateUrl: <span class="string">'views/angleddit.r.html'</span></div><div class="line">      };</div><div class="line"></div><div class="line"></div><div class="line">      <span class="variable">$stateProvider</span></div><div class="line">        .state(<span class="string">'angleddit.r'</span>, angledditView);</div><div class="line">}]);</div></pre></td></tr></table></figure>
+
+
+
+<p>and a state.</p>
+<figure class="highlight and"><figcaption><span>this si simple.</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">ui-sref</span>=<span class="value">"angleddit.r({'subreddit':''})"</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>look at the param…. it goes in the view<br>make sure the quotes</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">section</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-3"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">subreddit-Menu</span></span></div><div class="line">                      <span class="attribute">subreddits</span>=<span class="value">"subreddits"</span></div><div class="line">                      &gt;<span class="tag">&lt;/<span class="title">subreddit-Menu</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-8"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ui-view</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">section</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>note the ui-view.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/views/angleddit.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/views/angleddit.r.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>both needed now.</p>
+<p>watch the url. cool.. but nothign happening yet.</p>
+<p>now for our second resolve. to teh service!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">(subreddit)</span> </span>{</div><div class="line"></div><div class="line">  <span class="keyword">var</span> Subreddit = $resource(<span class="string">'http://www.reddit.com/r/:subreddit.json'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">var</span> params = {</div><div class="line">    subreddit: subreddit || <span class="string">'euphoricgoats'</span> <span class="comment">//are you a true herdsman?.</span></div><div class="line">  };</div><div class="line"></div><div class="line">  <span class="keyword">return</span> Subreddit</div><div class="line">    .get(params)</div><div class="line">    .$promise;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+<p>  and</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">AngledditApp</div><div class="line">  .config([<span class="string">'$stateProvider'</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">angleddit</span><span class="params">($stateProvider)</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">subredditpostsResolve</span><span class="params">(subreddit, $stateParams)</span> </span>{</div><div class="line">        <span class="keyword">return</span> subreddit.get($stateParams.subreddit);</div><div class="line">      }</div><div class="line"></div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditRResolve = {</div><div class="line">        subredditposts: subredditpostsResolve</div><div class="line"></div><div class="line">      };</div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">function</span> <span class="title">angledditRCtrl</span><span class="params">($scope, subredditposts)</span> </span>{</div><div class="line">        $scope.subredditposts = subredditposts;</div><div class="line">      }</div><div class="line"></div><div class="line">      <span class="keyword">var</span> angledditView = {</div><div class="line">        url: <span class="string">'/r/:subreddit'</span>,</div><div class="line">        templateUrl: <span class="string">'views/angleddit.r.html'</span>,</div><div class="line">        controller: angledditRCtrl,</div><div class="line">        resolve: angledditRResolve</div><div class="line">      };</div><div class="line"></div><div class="line"></div><div class="line">      $stateProvider</div><div class="line">        .state(<span class="string">'angleddit.r'</span>, angledditView);</div><div class="line">}]);</div></pre></td></tr></table></figure>
+
+<p>and in the view..</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>oh boy more json garbage!</p>
+<p>lets clean it up. again. like last time. yes.</p>
+<p>note the back and forth vuttons. sick as hell.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">angular</div><div class="line">  .module(<span class="string">'angledditApp'</span>)</div><div class="line">  .service(<span class="string">'subreddit'</span>, <span class="function"><span class="keyword">function</span> <span class="title">subreddit</span><span class="params">($resource)</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">toData</span><span class="params">(child)</span> </span>{</div><div class="line">      <span class="keyword">return</span> child.data;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">returnChildren</span><span class="params">(response)</span> </span>{</div><div class="line">      <span class="keyword">var</span> children = response.data.children || [];</div><div class="line">      <span class="keyword">var</span> subreddits = children.map(toData);</div><div class="line">      <span class="keyword">return</span> subreddits;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">(subreddit)</span> </span>{</div><div class="line">      <span class="keyword">var</span> Subreddit = $resource(<span class="string">'http://www.reddit.com/r/:subreddit.json'</span>);</div><div class="line">      <span class="keyword">var</span> params = {</div><div class="line">        subreddit: subreddit || <span class="string">'euphoricgoats'</span> <span class="comment">//beause it is best default.</span></div><div class="line">      };</div><div class="line">      <span class="keyword">return</span> Subreddit</div><div class="line">        .get(params)</div><div class="line">        .$promise</div><div class="line">        .then(returnChildren);</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//add search later!</span></div><div class="line">    <span class="comment">//fyi #page=5 for pages.</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">list</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> Subreddits = $resource(<span class="string">'http://www.reddit.com/reddits.json'</span>);</div><div class="line">      <span class="keyword">return</span> Subreddits</div><div class="line">        .get({})</div><div class="line">        .$promise</div><div class="line">        .then(returnChildren);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      list: list,</div><div class="line">      get: get</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+
+<p>  NICE! we can reuse the same function!!!<br>  Who wants directives? </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="variable">$ </span>yo <span class="symbol">angular:</span>directive subreddit-postlist</div><div class="line"><span class="variable">$ </span>yo <span class="symbol">angular:</span>directive subreddit-postlist-item</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'angledditApp'</span>)</div><div class="line">  .directive(<span class="string">'subredditPostlist'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      templateUrl: <span class="string">'./partials/subreddit-postlist.html'</span>,</div><div class="line">      restrict: <span class="string">'E'</span>,</div><div class="line">      scope: {</div><div class="line">        posts: <span class="string">'='</span></div><div class="line">      }</div><div class="line">    };</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>And</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row list-group-item"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-3"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"btn-group-vertical"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"btn btn-success btn-lg"</span> <span class="attribute">ng-click</span>=<span class="value">"upvote()"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"glyphicon glyphicon-circle-arrow-up"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"btn btn-danger btn-lg"</span> <span class="attribute">ng-click</span>=<span class="value">"downvote()"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"glyphicon glyphicon-circle-arrow-down"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-9"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">h4</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">""</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">h4</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"text-muted"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/OkcJug-Sept-2014-angular/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next disabled"><a>next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2014 Jesse Harlin
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/OkcJug-Sept-2014-angular/js/jquery.imagesloaded.min.js"></script>
+<script src="/OkcJug-Sept-2014-angular/js/gallery.js"></script>
+<script src="/OkcJug-Sept-2014-angular/js/bootstrap.min.js"></script>
+<script src="/OkcJug-Sept-2014-angular/js/jquery.tableofcontents.min.js"></script>
+<script src="/OkcJug-Sept-2014-angular/js/tocgenerator.min.js"></script>
+<script src="/OkcJug-Sept-2014-angular/js/main.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/OkcJug-Sept-2014-angular/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/OkcJug-Sept-2014-angular/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
