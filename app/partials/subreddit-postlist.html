@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="row">
+    <h3>Posts: {{posts.length}}</h3>
+  </div>
+  <div ng-repeat="post in posts" class="row list-group">
+    <subreddit-postlist-item post="post"></subreddit-postlist-item>
+  </div>
+</div>

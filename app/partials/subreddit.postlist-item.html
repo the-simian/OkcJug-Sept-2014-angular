@@ -1,0 +1,18 @@
+<div class="row list-group-item">
+  <div class="col-md-3">
+    <div class="btn-group-vertical">
+      <button class="btn btn-success btn-lg" ng-click="upvote()">
+        <span><span class="glyphicon glyphicon-circle-arrow-up"></span><span>{{post.ups}}</span></span>
+      </button>
+      <button class="btn btn-danger btn-lg" ng-click="downvote()">
+        <span><span class="glyphicon glyphicon-circle-arrow-down"></span><span>{{post.downs}}</span></span>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <h4><a href="{{post.url}}">{{post.title}}</a></h4>
+      <span class="text-muted">{{post.author}}</span>
+    </div>
+  </div>
+</div>

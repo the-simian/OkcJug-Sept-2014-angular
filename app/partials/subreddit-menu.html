@@ -1,0 +1,14 @@
+<div>
+  <div class="row">
+    <h3>Subreddits</h3>
+  </div>
+  <div class="row btn-group-vertical">
+    <div 
+          ng-repeat="subreddit in subreddits" 
+           class=" btn btn-default">
+      
+      
+      <subreddit-Menu-Item subreddit="{{subreddit.display_name}}"></subreddit-Menu-Item>
+    </div>
+  </div>
+</div>

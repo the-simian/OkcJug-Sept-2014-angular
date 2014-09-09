@@ -2,17 +2,18 @@
 
 /**
  * @ngdoc function
- * @name javaUgtalk2014App.controller:MainCtrl
+ * @name angledditApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the javaUgtalk2014App
+ * Controller of the angledditApp
  */
+
+
+
 angular
-  .module('Angleddit')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .module('angledditApp')
+  .controller('MainCtrl', function ($scope, $state) {
+  
+    $scope.$state = $state;
+  
   });

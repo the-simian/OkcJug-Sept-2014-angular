@@ -14,31 +14,35 @@
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
-  <script src="scripts/services/subreddit.js"></script>
   <!-- endbuild -->
 </head>
 
-<body ng-app="Angleddit">
+<body ng-app="angledditApp">
   <div class="container">
     <div class="header">
       <ul class="nav nav-pills pull-right">
-        <li class="active"><a ng-href="#">Home</a>
+        <li ui-sref-active="active">
+          <a  ui-sref="home">Home</a>
         </li>
-        <li><a ng-href="#">About</a>
+        <li ui-sref-active="active">
+          <a  ui-sref="angleddit">The Angleddit App</a>
         </li>
-        <li><a ng-href="#">Contact</a>
+        <li>
+          <a ng-href="http://the-simian.github.io/OkcJug-Sept-2014-angular/">The Tutorial</a>
         </li>
       </ul>
-      <h3 class="text-muted">javaUgtalk2014</h3>
+      <h3 class="text-muted">Angleddit</h3>
+      <h4 class="text-muted">For the Java Usergroup, September - 2014</h4>
     </div>
 
-    <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+    <div ui-view></div>
 
     <div class="footer">
       <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
     </div>
   </div>
-
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -46,8 +50,21 @@
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/services/subreddit.js"></script>
+  <script src="scripts/directives/subreddit-menu.js"></script>
+  <script src="scripts/directives/subreddit-menu-item.js"></script>
+  <script src="scripts/directives/subreddit-postlist.js"></script>
+  <script src="scripts/directives/subreddit-postlist-item.js"></script>
+  <script src="scripts/controllers/subreddit-postlist-item.js"></script>
+  <!-- endbuild -->
+
+  <script src="scripts/views/angleddit.js"></script>
+  <script src="scripts/views/angleddit.r.js"></script>
 </body>
 
 </html>
