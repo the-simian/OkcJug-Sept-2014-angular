@@ -12,8 +12,8 @@ language:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
-root: /
+url: http://the-simian.github.io
+root: /OkcJug-Sept-2014-angular/
 permalink: :year/:month/:day/:title/
 tag_dir: tags
 archive_dir: archives
