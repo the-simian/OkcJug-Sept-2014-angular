@@ -8,10 +8,8 @@ AngledditApp
       
       function subredditsResolve(subreddit) {
         
-          var listofStuff = subreddit.list();  
-          
-          
-        
+          var listofStuff = subreddit.list('programming');  
+
           return listofStuff;
       }
       

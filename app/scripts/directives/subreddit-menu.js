@@ -14,9 +14,6 @@ angular.module('angledditApp')
       replace: true,
       scope: {
         subreddits: '='
-      },
-      link: function postLink(scope, element, attrs) {
-        
       }
     };
   });

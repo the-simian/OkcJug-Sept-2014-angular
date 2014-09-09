@@ -34,10 +34,19 @@ angular
 
     //add search later!
     //fyi #page=5 for pages.
-    function list() {
-      var Subreddits = $resource('http://www.reddit.com/reddits.json');
+    function list(searchterm) {
+
+      var url = 'http://www.reddit.com/reddits';
+
+      if (searchterm) {
+        url = url + '/search';
+      }
+
+      var Subreddits = $resource(url + '.json');
       return Subreddits
-        .get({})
+        .get({
+          q: searchterm
+        })
         .$promise
         .then(returnChildren);
     }

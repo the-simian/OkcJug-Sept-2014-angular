@@ -13,9 +13,6 @@ angular.module('angledditApp')
       restrict: 'E',
       scope: {
         subreddit: '@'
-      },
-      link: function postLink(scope, element, attrs) {
-
       }
     };
   });
