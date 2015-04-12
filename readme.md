@@ -7,7 +7,7 @@ Running this application is simple.
 
 Clone the repo by typing
 ```sh
-git clone git@github.com:the-simian/OKCJS-December-2014-Angular-and-React.git
+git clone git@github.com:the-simian/OkcJug-Sept-2014-angular.git
 npm install
 bower install
 ```
